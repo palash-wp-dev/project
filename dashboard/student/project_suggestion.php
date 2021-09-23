@@ -1,0 +1,91 @@
+<?php 
+  session_start();
+  require_once "../../inc/classes.php";
+  $project = new Project;
+  
+  $stuId = $_SESSION['student_own_id'];
+  
+  $errNotice = [];
+  
+  if(isset($_POST['projectSuggestSubmit']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $title = $_POST['title'];
+    $suggestedBy = "Student";
+    $status = "Not completed";
+    $titleCount = $project-> titleDuplicate($title);
+    if(empty($title)){
+      $errNotice[] = "<span class='alert alert-danger alert-dismissible' role='alert'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>Project title is required.</span>";
+    }
+    elseif ($titleCount == 1) {
+     $errNotice[] = "<span class='alert alert-danger alert-dismissible' role='alert'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>This project has already been suggested.</span>";
+    }
+    else{
+      $project->projectSuggestedByStudent($title,$suggestedBy,$status,$stuId);
+      $errNotice[] = "<span class='alert alert-success' role='alert'>Project title submitted submission successfull!</span>";
+    }
+  }
+
+?>
+<?php require_once "navbar.php";?>
+    <!-- Side Navbar -->
+    <?php require_once "sidebar.php"?>
+    <div class="page">
+      <!-- navbar-->
+      <?php require_once "header.php";?>
+      <!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+            <li class="breadcrumb-item active">Suggest Project</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="notice col-sm-6" style=" position: absolute;left: 41%; top: 12%;"><p><?php if($errNotice){echo $errNotice[0];}?></p></div>
+
+      <section class="forms">
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header> 
+            <h1 class="h3 display">Suggest Project</h1>
+          </header>
+          <div class="row">
+            
+           
+          
+           
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h4>Suggest Project Title</h4>
+                </div>
+                <div class="card-body">
+                  <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" class="form-horizontal">
+                    
+                    <div class="line"></div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 form-control-label">Suggest Project</label>
+                      <div class="col-sm-10">
+                        <textarea id="w3review" class="form-control" name="title" rows="4" cols="50"></textarea><span class="text-small text-gray help-block-none">Enter the name of your project that you want to suggest on your own.</span>
+                      </div>
+                    </div>
+                   
+                   
+                    
+                   
+                  
+                    <div class="line"></div>
+                    <div class="form-group row">
+                      <div class="col-sm-4 offset-sm-2">
+                        <button type="submit" name="projectSuggestSubmit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+     <?php require_once "footer.php";?>

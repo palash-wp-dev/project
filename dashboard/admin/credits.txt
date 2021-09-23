@@ -1,0 +1,9 @@
+===================================================================
+Plugins Used
+===================================================================
+Nice scroll - http://manos.malihu.gr/jquery-custom-content-scroller/
+Circular plugin indicator - http://www.jqueryscript.net/loading/Animated-Circular-Progress-Indicator-Plugin-With-jQuery-Canvas.html
+Chart.js - https://github.com/chartjs/Chart.js
+jQuery Validation - https://jqueryvalidation.org/
+
+

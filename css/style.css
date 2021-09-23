@@ -1,0 +1,24 @@
+.login-link {
+	display: block;
+	background: skyblue;
+	padding: 30px;
+	text-align: center;
+	color: #ffffff;
+}
+.home-container h1 {
+	text-align: center;
+	margin-top: 5%;
+}
+
+.login-section {
+	margin-top: 50px; 
+}
+
+.home-container p {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.register {
+	margin-top: -100px;
+}
